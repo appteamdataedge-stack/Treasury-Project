@@ -1,0 +1,107 @@
+.de-sidebar {
+  width: var(--sidebar-w);
+  min-width: var(--sidebar-w);
+  background: #fff;
+  border-right: 1px solid var(--de-neutral-200);
+  display: flex;
+  flex-direction: column;
+  padding: 20px 12px;
+  min-height: calc(100vh - var(--navbar-h) - var(--footer-h));
+
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 8px;
+  }
+
+  &__group-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    color: var(--de-neutral-400);
+    padding: 4px 10px;
+    margin-bottom: 2px;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: var(--radius-md);
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--de-neutral-600);
+    text-decoration: none;
+    transition: all .12s;
+    cursor: pointer;
+
+    &:hover {
+      background: var(--de-neutral-50);
+      color: var(--de-navy);
+    }
+
+    &--active {
+      background: var(--de-teal-light);
+      color: var(--de-teal-dark);
+      font-weight: 600;
+
+      .de-sidebar__icon { color: var(--de-teal); }
+    }
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    color: var(--de-neutral-400);
+    transition: color .12s;
+  }
+
+  &__badge {
+    margin-left: auto;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    background: var(--de-amber);
+    color: #fff;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .de-sidebar__item:hover .de-sidebar__icon {
+    color: var(--de-navy);
+  }
+}
+
+// Mobile: fixed overlay, slides in from left
+@media (max-width: 768px) {
+  .de-sidebar {
+    position: fixed;
+    top: var(--navbar-h);
+    left: 0;
+    bottom: 0;
+    z-index: 298;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    min-height: unset;
+    box-shadow: none;
+
+    &--open {
+      transform: translateX(0);
+      box-shadow: 4px 0 24px rgba(0,0,0,.12);
+    }
+  }
+}

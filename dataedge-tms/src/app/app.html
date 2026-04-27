@@ -1,0 +1,14 @@
+<de-navbar></de-navbar>
+<div class="app-body">
+  @if (sidebarOpen) {
+    <div class="app-sidebar-backdrop" (click)="closeNav()"></div>
+  }
+  <de-sidebar [activeItem]="activeRoute" [isOpen]="sidebarOpen"></de-sidebar>
+  <main class="app-content">
+    <div class="content-inner">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>
+<de-footer></de-footer>
+<de-bottom-nav></de-bottom-nav>
