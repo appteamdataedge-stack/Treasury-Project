@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { NgSelectModule } from '@ng-select/ng-select';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { TmsSelectComponent } from '../../shared/components/tms-select/tms-select.component';
 
 export interface Deal {
   id: string;
@@ -23,7 +23,7 @@ export interface Deal {
 @Component({
   selector: 'app-blotter',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule, NgSelectModule],
+  imports: [CommonModule, RouterLink, FormsModule, TmsSelectComponent],
   animations: [
     trigger('slideOver', [
       transition(':enter', [

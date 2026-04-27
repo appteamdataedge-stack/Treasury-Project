@@ -76,15 +76,15 @@
       <!-- Book Type -->
       <div class="de-field">
         <label>Book Type <span class="pf-req">*</span></label>
-        <ng-select
+        <tms-select
           formControlName="bookType"
+          [items]="bookTypes"
+          bindValue="value"
+          bindLabel="label"
           [clearable]="false"
           [searchable]="false"
           placeholder="Select book type">
-          @for (bt of bookTypes; track bt.value) {
-            <ng-option [value]="bt.value">{{ bt.label }}</ng-option>
-          }
-        </ng-select>
+        </tms-select>
       </div>
 
       <!-- Status -->
@@ -141,16 +141,16 @@
           }
           @if (availableTagsForAdd.length > 0) {
             <div class="pf-tag-add">
-              <ng-select
+              <tms-select
                 [items]="availableTagsForAdd"
                 bindLabel="label"
                 bindValue="id"
                 placeholder="+ Add tag"
                 [clearable]="false"
                 [searchable]="false"
-                (change)="addTag($event?.id)"
-                class="pf-tag-select">
-              </ng-select>
+                [clearAfterSelect]="true"
+                (valueChange)="addTag($event)">
+              </tms-select>
             </div>
           }
         </div>
@@ -176,31 +176,16 @@
         </div>
         @if (dealerRestrict === 'SELECTED') {
           <div @slideDown class="pf-restrict-select">
-            <ng-select
+            <tms-select
               formControlName="selectedDealers"
               [items]="dealers"
               [multiple]="true"
               bindValue="id"
               bindLabel="name"
+              subLabelKey="role"
               placeholder="Select dealers..."
               [closeOnSelect]="false">
-              <ng-template ng-option-tmp let-item="item">
-                <div class="pf-dealer-opt">
-                  <div class="pf-dealer-avatar">{{ getInitials(item.name) }}</div>
-                  <div>
-                    <div class="pf-dealer-name">{{ item.name }}</div>
-                    <div class="pf-dealer-role">{{ item.role }}</div>
-                  </div>
-                </div>
-              </ng-template>
-              <ng-template ng-label-tmp let-item="item" let-clear="clear">
-                <span class="pf-pill">
-                  <span class="pf-pill__avatar">{{ getInitials(item.name) }}</span>
-                  {{ item.name }}
-                  <span class="pf-pill__x" (click)="clear(item)" aria-hidden="true">✕</span>
-                </span>
-              </ng-template>
-            </ng-select>
+            </tms-select>
             @if (portfolioForm.get('selectedDealers')!.errors?.['required'] && portfolioForm.get('selectedDealers')!.touched) {
               <span class="de-error">At least one dealer must be selected</span>
             }
@@ -217,7 +202,7 @@
         </div>
         @if (productRestrict === 'SELECTED') {
           <div @slideDown class="pf-restrict-select">
-            <ng-select
+            <tms-select
               formControlName="selectedProducts"
               [items]="products"
               [multiple]="true"
@@ -225,7 +210,7 @@
               bindLabel="label"
               placeholder="Select products..."
               [closeOnSelect]="false">
-            </ng-select>
+            </tms-select>
             @if (portfolioForm.get('selectedProducts')!.errors?.['required'] && portfolioForm.get('selectedProducts')!.touched) {
               <span class="de-error">At least one product must be selected</span>
             }
@@ -354,29 +339,16 @@
 
       @if (currencyScope === 'SELECTED') {
         <div @slideDown class="pf-restrict-select">
-          <ng-select
+          <tms-select
             formControlName="selectedCurrencies"
             [items]="currencies"
             [multiple]="true"
             [closeOnSelect]="false"
             bindValue="code"
-            bindLabel="name"
+            bindLabel="code"
+            subLabelKey="name"
             placeholder="Search currencies...">
-            <ng-template ng-option-tmp let-item="item">
-              <div class="pf-ccy-opt">
-                <span class="pf-ccy-opt__flag">{{ item.flag }}</span>
-                <span class="pf-ccy-opt__code">{{ item.code }}</span>
-                <span class="pf-ccy-opt__name">{{ item.name }}</span>
-              </div>
-            </ng-template>
-            <ng-template ng-label-tmp let-item="item" let-clear="clear">
-              <span class="pf-ccy-chip">
-                <span class="pf-ccy-chip__flag">{{ item.flag }}</span>
-                <span class="pf-ccy-chip__code">{{ item.code }}</span>
-                <span class="pf-ccy-chip__x" (click)="clear(item); $event.stopPropagation()" aria-hidden="true">✕</span>
-              </span>
-            </ng-template>
-          </ng-select>
+          </tms-select>
           @if (portfolioForm.get('selectedCurrencies')!.errors?.['required'] && portfolioForm.get('selectedCurrencies')!.touched) {
             <span class="de-error">At least one currency must be selected</span>
           }

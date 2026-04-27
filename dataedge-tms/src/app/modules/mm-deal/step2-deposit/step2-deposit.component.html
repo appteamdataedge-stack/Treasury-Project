@@ -116,24 +116,15 @@
         [class.mm-amount-group--invalid]="step2.get('amount')!.invalid && step2.get('amount')!.touched">
         <!-- Currency select -->
         <div class="mm-amount-group__ccy">
-          <ng-select
+          <tms-select
             formControlName="currency"
             [items]="svc.currencies"
             bindValue="code"
+            bindLabel="code"
+            subLabelKey="name"
             [clearable]="false"
-            [searchable]="false"
-            class="mm-ccy-select">
-            <ng-template ng-label-tmp let-item="item">
-              <span class="mm-ccy-label">{{ item.flag }} {{ item.code }}</span>
-            </ng-template>
-            <ng-template ng-option-tmp let-item="item">
-              <span class="mm-ccy-option">
-                <span>{{ item.flag }}</span>
-                <span class="mm-ccy-option__code">{{ item.code }}</span>
-                <span class="mm-ccy-option__name">{{ item.name }}</span>
-              </span>
-            </ng-template>
-          </ng-select>
+            [searchable]="false">
+          </tms-select>
         </div>
         <div class="mm-amount-group__divider"></div>
         <!-- Amount input -->

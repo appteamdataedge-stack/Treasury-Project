@@ -70,30 +70,16 @@
       <!-- Dealer -->
       <div class="de-field mm-field">
         <label>Dealer <span class="mm-req">*</span></label>
-        <ng-select
+        <tms-select
           formControlName="dealerId"
           [items]="svc.dealers"
           bindValue="id"
           bindLabel="name"
+          subLabelKey="role"
           [clearable]="false"
           [searchable]="false"
           placeholder="Select dealer">
-          <ng-template ng-option-tmp let-item="item">
-            <div class="mm-dealer-opt">
-              <div class="mm-avatar">{{ svc.getInitials(item.name) }}</div>
-              <div>
-                <div class="mm-dealer-name">{{ item.name }}</div>
-                <div class="mm-dealer-role">{{ item.role }}</div>
-              </div>
-            </div>
-          </ng-template>
-          <ng-template ng-label-tmp let-item="item">
-            <div class="mm-dealer-selected">
-              <div class="mm-avatar mm-avatar--sm">{{ svc.getInitials(item.name) }}</div>
-              <span>{{ item.name }}</span>
-            </div>
-          </ng-template>
-        </ng-select>
+        </tms-select>
         @if (step1.get('dealerId')!.invalid && step1.get('dealerId')!.touched) {
           <span class="de-error">Dealer is required</span>
         }
@@ -271,26 +257,15 @@
       <!-- Instrument -->
       <div class="de-field mm-field">
         <label>Instrument <span class="mm-req">*</span></label>
-        <ng-select
+        <tms-select
           formControlName="instrumentId"
           [items]="svc.instruments"
           bindValue="id"
           bindLabel="name"
+          subLabelKey="cashflow"
           [clearable]="false"
           placeholder="Select instrument">
-          <ng-template ng-option-tmp let-item="item">
-            <div class="mm-instrument-opt">
-              <span class="mm-instrument-opt__name">{{ item.name }}</span>
-              <span class="de-badge de-badge--neutral mm-instrument-opt__cat">{{ item.cashflow }}</span>
-            </div>
-          </ng-template>
-          <ng-template ng-label-tmp let-item="item">
-            <div class="mm-instrument-opt">
-              <span>{{ item.name }}</span>
-              <span class="de-badge de-badge--neutral mm-instrument-opt__cat">{{ item.cashflow }}</span>
-            </div>
-          </ng-template>
-        </ng-select>
+        </tms-select>
 
         @if (selectedInstrument) {
           <div @slideDown class="mm-inst-strip">
@@ -319,27 +294,15 @@
       <!-- Portfolio -->
       <div class="de-field mm-field">
         <label>Portfolio <span class="mm-req">*</span></label>
-        <ng-select
+        <tms-select
           formControlName="portfolioId"
           [items]="svc.portfolios"
           bindValue="id"
           bindLabel="name"
+          subLabelKey="bookType"
           [clearable]="false"
           placeholder="Select active portfolio">
-          <ng-template ng-option-tmp let-item="item">
-            <div class="mm-portfolio-opt">
-              <span class="mm-portfolio-opt__id">{{ item.id }}</span>
-              <span class="mm-portfolio-opt__name">{{ item.name }}</span>
-              <span class="de-badge de-badge--teal mm-portfolio-opt__status">{{ item.status }}</span>
-            </div>
-          </ng-template>
-          <ng-template ng-label-tmp let-item="item">
-            <div class="mm-portfolio-opt">
-              <span>{{ item.name }}</span>
-              <span class="de-badge de-badge--teal mm-portfolio-opt__status">{{ item.bookType }}</span>
-            </div>
-          </ng-template>
-        </ng-select>
+        </tms-select>
         @if (step1.get('portfolioId')!.invalid && step1.get('portfolioId')!.touched) {
           <span class="de-error">Portfolio is required</span>
         }

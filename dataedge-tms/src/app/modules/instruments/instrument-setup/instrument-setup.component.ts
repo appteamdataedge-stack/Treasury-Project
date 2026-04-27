@@ -2,14 +2,14 @@ import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { NgSelectModule } from '@ng-select/ng-select';
+import { TmsSelectComponent } from '../../../shared/components/tms-select/tms-select.component';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { ApprovalsService } from '../../../core/services/approvals.service';
 
 @Component({
   selector: 'app-instrument-setup',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, NgSelectModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, TmsSelectComponent],
   animations: [
     trigger('slideDown', [
       transition(':enter', [

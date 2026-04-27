@@ -27,28 +27,26 @@
 
     <div class="de-field">
       <label class="de-label">Module</label>
-      <select class="de-input at-select" [(ngModel)]="filters.module">
-        <option value="ALL">All Modules</option>
-        <option value="MM_DEAL">MM Deal</option>
-        <option value="PORTFOLIO">Portfolio</option>
-        <option value="INSTRUMENT">Instrument</option>
-      </select>
+      <tms-select
+        [(ngModel)]="filters.module"
+        [items]="moduleOptions"
+        bindValue="value"
+        bindLabel="label"
+        [clearable]="false"
+        [searchable]="false">
+      </tms-select>
     </div>
 
     <div class="de-field">
       <label class="de-label">Action</label>
-      <select class="de-input at-select" [(ngModel)]="filters.action">
-        <option value="ALL">All Actions</option>
-        <option value="CREATE">Create</option>
-        <option value="DRAFT">Draft</option>
-        <option value="SUBMIT">Submit</option>
-        <option value="AUTHORIZE">Authorize</option>
-        <option value="REJECT">Reject</option>
-        <option value="CANCEL">Cancel</option>
-        <option value="UPDATE">Update</option>
-        <option value="EARLY_TERMINATE">Terminate</option>
-        <option value="RECALL">Recall</option>
-      </select>
+      <tms-select
+        [(ngModel)]="filters.action"
+        [items]="actionSelectOptions"
+        bindValue="value"
+        bindLabel="label"
+        [clearable]="false"
+        [searchable]="false">
+      </tms-select>
     </div>
 
     <div class="de-field">

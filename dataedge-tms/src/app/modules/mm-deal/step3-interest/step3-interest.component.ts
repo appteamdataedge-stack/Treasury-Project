@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { ReactiveFormsModule, FormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { NgSelectModule } from '@ng-select/ng-select';
+import { TmsSelectComponent } from '../../../shared/components/tms-select/tms-select.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { animate, style, transition, trigger } from '@angular/animations';
@@ -20,7 +20,7 @@ export interface CashFlowRow {
 @Component({
   selector: 'app-step3-interest',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterLink, NgSelectModule, DealStepBarComponent],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterLink, TmsSelectComponent, DealStepBarComponent],
   animations: [
     trigger('cardSlide', [
       transition(':enter', [

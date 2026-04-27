@@ -60,13 +60,13 @@
         <label class="de-label">
           Instrument Type <span class="de-required">*</span>
         </label>
-        <ng-select
+        <tms-select
           [items]="typeOptions"
           bindLabel="label"
           bindValue="value"
           formControlName="instrumentType"
           placeholder="Select instrument type">
-        </ng-select>
+        </tms-select>
         @if (form.get('instrumentType')?.invalid && form.get('instrumentType')?.touched) {
           <span class="de-field-error">Instrument type is required</span>
         }

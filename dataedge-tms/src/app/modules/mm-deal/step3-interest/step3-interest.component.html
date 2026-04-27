@@ -161,9 +161,9 @@
           <!-- Settlement Frequency -->
           <div class="de-field">
             <label>Settlement Frequency</label>
-            <ng-select formControlName="settlementFreq" [items]="settlementFreqOptions"
+            <tms-select formControlName="settlementFreq" [items]="settlementFreqOptions"
               bindValue="id" bindLabel="label" [clearable]="false" [searchable]="false">
-            </ng-select>
+            </tms-select>
           </div>
 
         </div>
@@ -186,18 +186,9 @@
           <!-- Benchmark -->
           <div class="de-field">
             <label>Benchmark <span style="color:var(--de-red)">*</span></label>
-            <ng-select formControlName="benchmark" [items]="benchmarkOptions"
-              bindValue="id" [clearable]="false" placeholder="Select benchmark…">
-              <ng-template ng-label-tmp let-item="item">
-                <span class="mm-bm-label">{{ item.label }}</span>
-              </ng-template>
-              <ng-template ng-option-tmp let-item="item">
-                <div class="mm-bm-option">
-                  <span class="mm-bm-option__code">{{ item.label }}</span>
-                  <span class="mm-bm-option__name">{{ item.name }}</span>
-                </div>
-              </ng-template>
-            </ng-select>
+            <tms-select formControlName="benchmark" [items]="benchmarkOptions"
+              bindValue="id" bindLabel="label" subLabelKey="name" [clearable]="false" placeholder="Select benchmark…">
+            </tms-select>
             @if (step3.get('benchmark')!.errors?.['required'] && step3.get('benchmark')!.touched) {
               <span class="de-error">Benchmark is required</span>
             }
@@ -206,9 +197,9 @@
           <!-- Benchmark Period -->
           <div class="de-field">
             <label>Benchmark Period <span style="color:var(--de-red)">*</span></label>
-            <ng-select formControlName="benchmarkPeriod" [items]="benchmarkPeriodOptions"
+            <tms-select formControlName="benchmarkPeriod" [items]="benchmarkPeriodOptions"
               bindValue="id" bindLabel="label" [clearable]="false" [searchable]="false">
-            </ng-select>
+            </tms-select>
             @if (step3.get('benchmarkPeriod')!.errors?.['required'] && step3.get('benchmarkPeriod')!.touched) {
               <span class="de-error">Benchmark period is required</span>
             }
@@ -226,9 +217,9 @@
           <!-- Fixing Frequency -->
           <div class="de-field">
             <label>Fixing Frequency <span style="color:var(--de-red)">*</span></label>
-            <ng-select formControlName="fixingFrequency" [items]="fixingFreqOptions"
+            <tms-select formControlName="fixingFrequency" [items]="fixingFreqOptions"
               bindValue="id" bindLabel="label" [clearable]="false" [searchable]="false">
-            </ng-select>
+            </tms-select>
             @if (step3.get('fixingFrequency')!.errors?.['required'] && step3.get('fixingFrequency')!.touched) {
               <span class="de-error">Fixing frequency is required</span>
             }
@@ -237,9 +228,9 @@
           <!-- Settlement Frequency -->
           <div class="de-field">
             <label>Settlement Frequency</label>
-            <ng-select formControlName="settlementFreq" [items]="settlementFreqOptions"
+            <tms-select formControlName="settlementFreq" [items]="settlementFreqOptions"
               bindValue="id" bindLabel="label" [clearable]="false" [searchable]="false">
-            </ng-select>
+            </tms-select>
           </div>
 
           <!-- All-in rate display -->
@@ -308,9 +299,9 @@
       <!-- Back Stub Period -->
       <div class="de-field">
         <label>Back Stub Period</label>
-        <ng-select formControlName="backStubPeriod" [items]="backStubOptions"
+        <tms-select formControlName="backStubPeriod" [items]="backStubOptions"
           bindValue="id" bindLabel="label" [clearable]="false" [searchable]="false">
-        </ng-select>
+        </tms-select>
         @if (backStubDesc) {
           <span class="de-hint">{{ backStubDesc }}</span>
         }

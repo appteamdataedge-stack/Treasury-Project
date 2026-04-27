@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { ReactiveFormsModule, FormsModule, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { NgSelectModule } from '@ng-select/ng-select';
+import { TmsSelectComponent } from '../../../shared/components/tms-select/tms-select.component';
 import { Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { animate, style, transition, trigger } from '@angular/animations';
@@ -26,7 +26,7 @@ function futureDateValidator(ctrl: AbstractControl): ValidationErrors | null {
 @Component({
   selector: 'app-step2-deposit',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterLink, NgSelectModule, DealStepBarComponent],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterLink, TmsSelectComponent, DealStepBarComponent],
   animations: [
     trigger('slideDown', [
       transition(':enter', [

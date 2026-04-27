@@ -2,7 +2,7 @@ import { Component, ElementRef, HostListener, OnInit, OnDestroy } from '@angular
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { NgSelectModule } from '@ng-select/ng-select';
+import { TmsSelectComponent } from '../../../shared/components/tms-select/tms-select.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { animate, style, transition, trigger } from '@angular/animations';
@@ -12,7 +12,7 @@ import { DealStepBarComponent } from '../deal-step-bar/deal-step-bar.component';
 @Component({
   selector: 'app-step1-basics',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterLink, NgSelectModule, DealStepBarComponent],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterLink, TmsSelectComponent, DealStepBarComponent],
   animations: [
     trigger('slideDown', [
       transition(':enter', [

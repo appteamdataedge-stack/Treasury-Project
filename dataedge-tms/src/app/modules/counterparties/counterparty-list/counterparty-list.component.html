@@ -47,18 +47,22 @@
     <input class="cp-filter-bar__input" type="text" placeholder="Search name, BP ID or SWIFT…" [(ngModel)]="searchTerm" />
   </div>
   <div class="cp-filter-bar__selects">
-    <select class="cp-select" [(ngModel)]="statusFilter">
-      <option value="ALL">All Statuses</option>
-      <option value="ACTIVE">Active</option>
-      <option value="INACTIVE">Inactive</option>
-      <option value="BLACKLISTED">Blacklisted</option>
-    </select>
-    <select class="cp-select" [(ngModel)]="categoryFilter">
-      <option value="ALL">All Categories</option>
-      <option value="BANK">Bank</option>
-      <option value="NBFI">NBFI</option>
-      <option value="CORPORATE">Corporate</option>
-    </select>
+    <tms-select
+      [(ngModel)]="statusFilter"
+      [items]="statusOptions"
+      bindValue="value"
+      bindLabel="label"
+      [clearable]="false"
+      [searchable]="false">
+    </tms-select>
+    <tms-select
+      [(ngModel)]="categoryFilter"
+      [items]="categoryOptions"
+      bindValue="value"
+      bindLabel="label"
+      [clearable]="false"
+      [searchable]="false">
+    </tms-select>
   </div>
   <span class="cp-filter-bar__count">{{ filtered.length }} of {{ allCounterparties.length }}</span>
 </div>

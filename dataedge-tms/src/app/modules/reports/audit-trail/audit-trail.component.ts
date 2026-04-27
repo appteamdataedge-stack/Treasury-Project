@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { AuditService, AuditLog, AuditFilter } from '../../../core/services/audit.service';
+import { TmsSelectComponent } from '../../../shared/components/tms-select/tms-select.component';
 
 @Component({
   selector: 'app-audit-trail',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, TmsSelectComponent],
   templateUrl: './audit-trail.component.html',
   styleUrl: './audit-trail.component.scss'
 })
@@ -16,6 +17,26 @@ export class AuditTrailComponent implements OnInit {
   private auditService = inject(AuditService);
 
   activeView: 'table' | 'timeline' = 'table';
+
+  readonly moduleOptions = [
+    { value: 'ALL',        label: 'All Modules'  },
+    { value: 'MM_DEAL',    label: 'MM Deal'       },
+    { value: 'PORTFOLIO',  label: 'Portfolio'     },
+    { value: 'INSTRUMENT', label: 'Instrument'    },
+  ];
+
+  readonly actionSelectOptions = [
+    { value: 'ALL',             label: 'All Actions'  },
+    { value: 'CREATE',          label: 'Create'       },
+    { value: 'DRAFT',           label: 'Draft'        },
+    { value: 'SUBMIT',          label: 'Submit'       },
+    { value: 'AUTHORIZE',       label: 'Authorize'    },
+    { value: 'REJECT',          label: 'Reject'       },
+    { value: 'CANCEL',          label: 'Cancel'       },
+    { value: 'UPDATE',          label: 'Update'       },
+    { value: 'EARLY_TERMINATE', label: 'Terminate'    },
+    { value: 'RECALL',          label: 'Recall'       },
+  ];
 
   filters: AuditFilter = { module: 'ALL', action: 'ALL', user: '', from: '', to: '' };
 

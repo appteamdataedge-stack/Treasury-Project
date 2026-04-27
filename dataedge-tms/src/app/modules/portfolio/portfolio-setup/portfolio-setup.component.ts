@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { NgSelectModule } from '@ng-select/ng-select';
+import { TmsSelectComponent } from '../../../shared/components/tms-select/tms-select.component';
 import { FormsModule } from '@angular/forms';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
@@ -21,7 +21,7 @@ interface Currency {
 @Component({
   selector: 'app-portfolio-setup',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterLink, NgSelectModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterLink, TmsSelectComponent],
   animations: [
     trigger('slideDown', [
       transition(':enter', [

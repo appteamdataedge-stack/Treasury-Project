@@ -143,20 +143,17 @@
     flex-shrink: 0;
     background: var(--de-neutral-50);
 
-    // Strip ng-select's own borders
-    ::ng-deep .ng-select-container {
+    // Strip tms-select trigger border (outer group provides the border)
+    ::ng-deep .tms-trigger {
       border: none !important;
       border-radius: 0 !important;
       box-shadow: none !important;
       background: transparent !important;
-      height: 40px !important;
-      min-height: 40px !important;
+      min-height: 40px;
     }
-    ::ng-deep .ng-select.ng-select-focused .ng-select-container {
-      box-shadow: none !important;
-    }
-    ::ng-deep .ng-dropdown-panel {
-      border-radius: var(--radius-md) !important;
+
+    // Panel can be wider than the narrow trigger
+    ::ng-deep .tms-panel {
       min-width: 200px;
     }
   }

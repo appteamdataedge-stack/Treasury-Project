@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { TmsSelectComponent } from '../../../shared/components/tms-select/tms-select.component';
 
 export interface Counterparty {
   bpId: string;
@@ -27,7 +28,7 @@ export interface Counterparty {
 @Component({
   selector: 'app-counterparty-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, TmsSelectComponent],
   animations: [
     trigger('slideOver', [
       transition(':enter', [
@@ -49,8 +50,22 @@ export interface Counterparty {
 export class CounterpartyListComponent {
 
   searchTerm = '';
-  statusFilter: 'ALL' | 'ACTIVE' | 'INACTIVE' | 'BLACKLISTED' = 'ALL';
-  categoryFilter: 'ALL' | 'BANK' | 'NBFI' | 'CORPORATE' = 'ALL';
+  statusFilter: string = 'ALL';
+  categoryFilter: string = 'ALL';
+
+  readonly statusOptions = [
+    { value: 'ALL',         label: 'All Statuses' },
+    { value: 'ACTIVE',      label: 'Active'       },
+    { value: 'INACTIVE',    label: 'Inactive'     },
+    { value: 'BLACKLISTED', label: 'Blacklisted'  },
+  ];
+
+  readonly categoryOptions = [
+    { value: 'ALL',       label: 'All Categories' },
+    { value: 'BANK',      label: 'Bank'           },
+    { value: 'NBFI',      label: 'NBFI'           },
+    { value: 'CORPORATE', label: 'Corporate'      },
+  ];
 
   selected: Counterparty | null = null;
   openDetail(cp: Counterparty): void { this.selected = cp; }

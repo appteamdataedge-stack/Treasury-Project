@@ -270,37 +270,37 @@
       <!-- Counterparty -->
       <div class="bl-filter-group">
         <label class="bl-filter-label">Counterparty</label>
-        <ng-select
+        <tms-select
           [items]="uniqueCounterparties"
           [multiple]="true"
           [(ngModel)]="filters.counterparties"
           placeholder="All counterparties"
           [closeOnSelect]="false">
-        </ng-select>
+        </tms-select>
       </div>
 
       <!-- Currency -->
       <div class="bl-filter-group">
         <label class="bl-filter-label">Currency</label>
-        <ng-select
+        <tms-select
           [items]="uniqueCurrencies"
           [multiple]="true"
           [(ngModel)]="filters.currencies"
           placeholder="All currencies"
           [closeOnSelect]="false">
-        </ng-select>
+        </tms-select>
       </div>
 
       <!-- Status -->
       <div class="bl-filter-group">
         <label class="bl-filter-label">Status</label>
-        <ng-select
+        <tms-select
           [items]="statusOptions"
           [multiple]="true"
           [(ngModel)]="filters.statuses"
           placeholder="All statuses"
           [closeOnSelect]="false">
-        </ng-select>
+        </tms-select>
       </div>
 
     </div>
