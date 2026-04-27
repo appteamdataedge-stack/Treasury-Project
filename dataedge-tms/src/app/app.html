@@ -1,14 +1,20 @@
-<de-navbar></de-navbar>
-<div class="app-body">
-  @if (sidebarOpen) {
-    <div class="app-sidebar-backdrop" (click)="closeNav()"></div>
-  }
-  <de-sidebar [activeItem]="activeRoute" [isOpen]="sidebarOpen"></de-sidebar>
-  <main class="app-content">
-    <div class="content-inner">
-      <router-outlet></router-outlet>
+<div class="shell">
+  <div class="shell-nav">
+    <de-navbar></de-navbar>
+  </div>
+  <div class="shell-body">
+    @if (sidebarOpen) {
+      <div class="app-sidebar-backdrop" (click)="closeNav()"></div>
+    }
+    <div class="shell-aside">
+      <de-sidebar [activeItem]="activeRoute" [isOpen]="sidebarOpen"></de-sidebar>
     </div>
-  </main>
+    <main class="shell-main">
+      <div class="content-inner">
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+  </div>
+  <de-footer></de-footer>
 </div>
-<de-footer></de-footer>
 <de-bottom-nav></de-bottom-nav>

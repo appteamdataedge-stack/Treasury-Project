@@ -17,6 +17,14 @@ export const routes: Routes = [
         .then(m => m.PortfolioSetupComponent)
   },
 
+  // MM Deal summary (must come before :id to avoid segment conflicts)
+  {
+    path: 'mm-deal/:id/summary',
+    loadComponent: () =>
+      import('./modules/mm-deal/deal-summary/deal-summary.component')
+        .then(m => m.DealSummaryComponent)
+  },
+
   // MM Deal detail
   {
     path: 'mm-deal/:id',
@@ -61,12 +69,43 @@ export const routes: Routes = [
         .then(m => m.InstrumentSetupComponent)
   },
 
+  // Demo Guide
+  {
+    path: 'demo',
+    loadComponent: () =>
+      import('./modules/demo/demo.component')
+        .then(m => m.DemoComponent)
+  },
+
   // Authorization Inbox
   {
     path: 'auth-inbox',
     loadComponent: () =>
       import('./modules/approvals/approvals.component')
         .then(m => m.ApprovalsComponent)
+  },
+
+  // Counterparties
+  {
+    path: 'counterparties',
+    loadComponent: () =>
+      import('./modules/counterparties/counterparty-list/counterparty-list.component')
+        .then(m => m.CounterpartyListComponent)
+  },
+
+  // Reports
+  {
+    path: 'reports/deals',
+    loadComponent: () =>
+      import('./modules/shared/placeholder/placeholder.component')
+        .then(m => m.PlaceholderComponent),
+    data: { title: 'Deal Summary Report' }
+  },
+  {
+    path: 'reports/audit',
+    loadComponent: () =>
+      import('./modules/reports/audit-trail/audit-trail.component')
+        .then(m => m.AuditTrailComponent)
   },
 
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' }

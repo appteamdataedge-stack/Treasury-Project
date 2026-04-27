@@ -44,7 +44,11 @@ export interface Deal {
 })
 export class BlotterComponent {
 
-  filterOpen = false;
+  filterOpen   = false;
+  selectedDeal: Deal | null = null;
+
+  selectDeal(d: Deal): void { this.filterOpen = false; this.selectedDeal = d; }
+  closeDeal(): void          { this.selectedDeal = null; }
 
   filters = {
     direction:      'ALL' as 'ALL' | 'ACCEPT' | 'PLACE',

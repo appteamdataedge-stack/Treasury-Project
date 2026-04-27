@@ -59,7 +59,7 @@
   <button class="dd-tab" [class.dd-tab--active]="activeTab === 'summary'"    (click)="setTab('summary')">Summary</button>
   <button class="dd-tab" [class.dd-tab--active]="activeTab === 'cashflow'"   (click)="setTab('cashflow')">Cashflow Schedule</button>
   <button class="dd-tab" [class.dd-tab--active]="activeTab === 'accounting'" (click)="setTab('accounting')">Accounting Entries</button>
-  <button class="dd-tab" [class.dd-tab--active]="activeTab === 'audit'"      (click)="setTab('audit')">Audit Trail</button>
+  <button class="dd-tab" [class.dd-tab--active]="activeTab === 'audit'"      (click)="setTab('audit')">Lifecycle</button>
 </div>
 
 <!-- ─── Tab: Summary ──────────────────────────────────────────────────────── -->
@@ -276,33 +276,30 @@
   </div>
 }
 
-<!-- ─── Tab: Audit Trail ──────────────────────────────────────────────────── -->
+<!-- ─── Tab: Lifecycle ────────────────────────────────────────────────────── -->
 @if (activeTab === 'audit') {
   <div class="dd-tab-content">
-    <div class="de-card">
+    <div class="de-card dd-lifecycle-card">
       <div class="de-card__header">
         <div class="de-card__icon">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
           </svg>
         </div>
-        <h3>Audit Trail</h3>
+        <h3>Lifecycle</h3>
       </div>
-      <div class="dd-timeline">
-        @for (ev of auditEvents; track ev.time) {
-          <div class="dd-timeline__event" [class.dd-timeline__event--last]="$last">
-            <div class="dd-timeline__dot"></div>
-            <div class="dd-timeline__body">
-              <div class="dd-timeline__head">
-                <span class="dd-timeline__user">{{ ev.user }}</span>
-                <span class="dd-timeline__role">· {{ ev.role }}</span>
-                <span class="dd-timeline__time">{{ ev.date }}, {{ ev.time }}</span>
-              </div>
-              <p class="dd-timeline__text">{{ ev.event }}</p>
-            </div>
-          </div>
-        }
-      </div>
+      @for (ev of auditEvents; track ev.id) {
+        <div class="dd-lc-row">
+          <span class="dd-lc-dot" [style.background]="dotColor(ev.action)"></span>
+          <span class="dd-lc-time">{{ fmtTs(ev.timestamp) }}</span>
+          <span class="de-badge de-badge--{{ actionBadge(ev.action) }}">{{ actionLabel(ev.action) }}</span>
+          <span class="dd-lc-desc">{{ ev.description }}</span>
+          <span class="dd-lc-user">{{ ev.user }}</span>
+        </div>
+      }
+      @if (auditEvents.length === 0) {
+        <p class="dd-lc-empty">No lifecycle events found for this deal.</p>
+      }
     </div>
   </div>
 }

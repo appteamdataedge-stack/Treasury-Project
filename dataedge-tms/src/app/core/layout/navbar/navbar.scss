@@ -1,11 +1,15 @@
+:host {
+  display: block;
+  height: var(--navbar-h);
+  width: 100%;
+}
+
 .de-navbar {
   display: flex;
   align-items: center;
   height: var(--navbar-h);
   background: var(--de-navy);
   padding: 0 20px;
-  position: sticky;
-  top: 0;
   z-index: 100;
   gap: 16px;
 

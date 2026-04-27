@@ -13,7 +13,10 @@ import { LayoutService } from './core/services/layout.service';
   standalone: true,
   imports: [RouterOutlet, CommonModule, NavbarComponent, SidebarComponent, FooterComponent, BottomNavComponent],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
+  host: {
+    style: 'display:flex; flex-direction:column; height:100vh; overflow:hidden;'
+  }
 })
 export class App {
   private layout = inject(LayoutService);

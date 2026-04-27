@@ -220,7 +220,7 @@ $db-violet-light:  #F3EFFE;
   letter-spacing: .3px;
 
   &--bdt { background: rgba(13,27,42,.1);     color: var(--de-navy); }
-  &--usd { background: $db-emerald-light;     color: darken($db-emerald, 10%); }
+  &--usd { background: $db-emerald-light;     color: #0C8268; }
   &--gbp { background: $db-violet-light;      color: $db-violet; }
   &--eur { background: var(--de-amber-light); color: var(--de-amber-dark); }
 }
@@ -346,7 +346,7 @@ $db-violet-light:  #F3EFFE;
   font-weight: 700;
 
   &--indigo  { background: $db-indigo-light;  color: $db-indigo;  }
-  &--emerald { background: $db-emerald-light; color: darken($db-emerald, 10%); }
+  &--emerald { background: $db-emerald-light; color: #0C8268; }
 }
 
 @keyframes barGrow {

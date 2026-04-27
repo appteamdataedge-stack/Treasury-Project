@@ -273,74 +273,63 @@
   margin-left: 4px;
 }
 
-// ── Audit timeline ───────────────────────────────────────────────────────────
+// ── Lifecycle tab (compact timeline) ─────────────────────────────────────────
 
-.dd-timeline {
-  padding-left: 24px;
+.dd-lifecycle-card {
+  padding: 0;
+  .de-card__header { padding: 16px 20px 12px; }
+}
+
+.dd-lc-row {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px;
+  border-top: 1px solid var(--de-neutral-100);
+  transition: background 0.1s;
 
-  &__event {
-    position: relative;
-    padding-bottom: 28px;
+  &:hover { background: var(--de-neutral-50); }
+}
 
-    &::before {
-      content: '';
-      position: absolute;
-      left: -17px;
-      top: 20px;
-      bottom: 0;
-      width: 2px;
-      background: var(--de-neutral-200);
-    }
+.dd-lc-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
 
-    &--last::before { display: none; }
-  }
+.dd-lc-time {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--de-neutral-400);
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-width: 144px;
+}
 
-  &__dot {
-    position: absolute;
-    left: -24px;
-    top: 4px;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: var(--de-teal);
-    border: 2px solid #fff;
-    box-shadow: 0 0 0 2px var(--de-teal-light);
-  }
+.dd-lc-desc {
+  font-size: 13px;
+  color: var(--de-neutral-700);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
-  &__head {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 4px;
-  }
+.dd-lc-user {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--de-neutral-500);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
 
-  &__user {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--de-navy);
-  }
-
-  &__role {
-    font-size: 12px;
-    color: var(--de-neutral-400);
-  }
-
-  &__time {
-    font-size: 12px;
-    color: var(--de-neutral-400);
-    margin-left: auto;
-    font-family: var(--font-mono);
-    white-space: nowrap;
-  }
-
-  &__text {
-    font-size: 13px;
-    color: var(--de-neutral-600);
-    margin: 0;
-  }
+.dd-lc-empty {
+  padding: 32px 20px;
+  text-align: center;
+  color: var(--de-neutral-400);
+  font-size: 13px;
 }
 
 // ── Sticky footer bar ────────────────────────────────────────────────────────

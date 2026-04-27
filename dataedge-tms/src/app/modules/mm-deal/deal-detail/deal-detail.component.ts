@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { AuditService, AuditLog } from '../../../core/services/audit.service';
 
 type Tab = 'summary' | 'cashflow' | 'accounting' | 'audit';
 
@@ -12,6 +13,8 @@ type Tab = 'summary' | 'cashflow' | 'accounting' | 'audit';
   styleUrl: './deal-detail.component.scss'
 })
 export class DealDetailComponent {
+
+  private auditService = inject(AuditService);
 
   activeTab: Tab = 'summary';
   setTab(t: Tab): void { this.activeTab = t; }
@@ -51,10 +54,38 @@ export class DealDetailComponent {
     { date: '22 Apr 2026', description: 'Cr MM Liability GL',    gl: '2001-MM-Liability', dr: null,  cr: 10_000_000 },
   ];
 
-  readonly auditEvents = [
-    { date: '20 Apr 2026', time: '09:14', user: 'MD Rahman',  role: 'Dealer',             event: 'Deal created and submitted for authorization' },
-    { date: '21 Apr 2026', time: '10:32', user: 'KM Hossain', role: 'Treasury Manager',   event: 'Deal authorized' },
-  ];
+  get auditEvents(): AuditLog[] {
+    return this.auditService.getByRefId(this.deal.id);
+  }
+
+  readonly actionLabelMap: Record<string, string> = {
+    CREATE: 'CREATE', DRAFT: 'DRAFT', SUBMIT: 'SUBMIT', AUTHORIZE: 'AUTHORIZE',
+    REJECT: 'REJECT', CANCEL: 'CANCEL', UPDATE: 'UPDATE',
+    EARLY_TERMINATE: 'TERMINATE', RECALL: 'RECALL',
+  };
+
+  readonly actionBadgeMap: Record<string, string> = {
+    CREATE: 'teal', DRAFT: 'neutral', SUBMIT: 'amber', AUTHORIZE: 'green',
+    REJECT: 'red', CANCEL: 'neutral', UPDATE: 'navy', EARLY_TERMINATE: 'amber', RECALL: 'amber',
+  };
+
+  readonly dotColorMap: Record<string, string> = {
+    CREATE: '#0FA383', DRAFT: '#9CA3AF', SUBMIT: '#F5A623', AUTHORIZE: '#16A34A',
+    REJECT: '#DC2626', CANCEL: '#9CA3AF', UPDATE: '#0D1B2A',
+    EARLY_TERMINATE: '#F5A623', RECALL: '#F5A623',
+  };
+
+  actionLabel(a: string): string { return this.actionLabelMap[a] ?? a; }
+  actionBadge(a: string): string { return this.actionBadgeMap[a] ?? 'neutral'; }
+  dotColor(a: string): string    { return this.dotColorMap[a]    ?? '#9CA3AF'; }
+
+  fmtTs(ts: string): string {
+    const d = new Date(ts);
+    return d.toLocaleString('en-GB', {
+      day: '2-digit', month: 'short', year: 'numeric',
+      hour: '2-digit', minute: '2-digit', hour12: false
+    });
+  }
 
   fmtAmount(n: number): string {
     return n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });

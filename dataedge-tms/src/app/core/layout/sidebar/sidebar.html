@@ -1,4 +1,5 @@
 <aside class="de-sidebar" [class.de-sidebar--open]="isOpen">
+  <div class="aside-inner">
   <nav class="de-sidebar__nav">
     @for (group of navGroups; track group.label) {
       <div class="de-sidebar__group">
@@ -21,4 +22,5 @@
       </div>
     }
   </nav>
+  </div>
 </aside>

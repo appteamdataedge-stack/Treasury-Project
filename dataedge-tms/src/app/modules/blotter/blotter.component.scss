@@ -122,10 +122,12 @@
   }
 
   &__row {
+    cursor: pointer;
     transition: background 0.1s;
 
     &:last-child td { border-bottom: none; }
     &:hover td      { background: var(--de-neutral-50); }
+    &--selected td  { background: var(--de-teal-bg); }
   }
 }
 
@@ -332,6 +334,67 @@
     border-top: 1px solid var(--de-neutral-200);
     flex-shrink: 0;
   }
+}
+
+// ── Deal Preview Panel extras ──────────────────────────────────────────────
+
+.bl-panel--deal .bl-panel__header {
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  padding-right: 48px;
+}
+
+.bl-panel__deal-id-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.bl-panel__deal-cp {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--de-navy);
+  margin: 0;
+}
+
+.bl-deal-id-chip {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--de-teal-dark);
+  background: var(--de-teal-light);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.bl-panel--deal .bl-panel__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+.bl-panel--deal .bl-panel__footer {
+  display: flex;
+  gap: 10px;
+}
+
+.bl-panel__dl {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 10px 12px;
+  font-size: 13px;
+
+  dt { color: var(--de-neutral-500); font-weight: 500; }
+  dd { color: var(--de-neutral-800); font-weight: 500; margin: 0; }
+}
+
+.bl-panel__mono {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--de-navy);
 }
 
 // ── Filter Fields ──────────────────────────────────────────────────────────
