@@ -8,6 +8,7 @@ import { takeUntil } from 'rxjs/operators';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { DealFormService } from '../deal-form.service';
 import { DealStepBarComponent } from '../deal-step-bar/deal-step-bar.component';
+import { MmDealApiService, MmDealPayload } from '../mm-deal-api.service';
 
 export interface CashFlowRow {
   date: string;
@@ -56,6 +57,7 @@ export class Step3InterestComponent implements OnInit, OnDestroy {
   showModal    = false;
   showToast    = false;
   toastMsg     = '';
+  toastIsError = false;
   showInboxBtn = false;
 
   benchmarkOptions = [
@@ -107,6 +109,7 @@ export class Step3InterestComponent implements OnInit, OnDestroy {
 
   constructor(
     public svc: DealFormService,
+    private mmDealApi: MmDealApiService,
     private router: Router,
     private cdr: ChangeDetectorRef
   ) {}
@@ -281,11 +284,51 @@ export class Step3InterestComponent implements OnInit, OnDestroy {
   }
 
   confirmSubmit(): void {
-    this.showModal    = false;
-    this.toastMsg     = `Deal ${this.step1.get('dealId')?.value ?? 'MM-DEAL'} submitted for authorization.`;
-    this.showToast    = true;
-    this.showInboxBtn = true;
-    setTimeout(() => { this.showToast = false; this.cdr.detectChanges(); }, 3000);
+    this.showModal = false;
+    this.mmDealApi.submitDeal(this.buildPayload()).subscribe({
+      next: ({ dealId }) => {
+        this.router.navigate(['/blotter']);
+      },
+      error: () => {
+        this.toastIsError = true;
+        this.toastMsg  = 'Deal submission failed. Please try again.';
+        this.showToast = true;
+        setTimeout(() => { this.showToast = false; this.toastIsError = false; this.cdr.detectChanges(); }, 4000);
+      }
+    });
+  }
+
+  private buildPayload(): MmDealPayload {
+    const s1 = this.step1.getRawValue();
+    const s2 = this.step2.getRawValue();
+    const s3 = this.step3.getRawValue();
+    return {
+      dealId:          s1['dealId'] ?? '',
+      productId:       'MM',
+      instrumentId:    s1['instrumentId'] ?? '',
+      portfolioId:     s1['portfolioId'] ?? '',
+      dealDate:        s1['dealDate'] ?? '',
+      dealTime:        s1['dealTime'] || new Date().toTimeString().slice(0, 5),
+      dealerId:        s1['dealerId'] ?? '',
+      counterpartyId:  s1['counterpartyId'] ?? '',
+      valueDate:       s2['valueDate'] ?? '',
+      maturityDate:    s2['maturityDate'] ?? '',
+      dealType:        s1['direction'] ?? '',
+      depositType:     s2['depositType'] ?? '',
+      pricingType:     s1['pricingType'] ?? '',
+      currency:        s2['currency'] ?? '',
+      principalAmount: parseFloat(s2['amount'] ?? '0') || 0,
+      maturityAmount:  this.maturityValue,
+      interestBasis:   s3['interestBasis'] ?? '',
+      interestRate:    s3['interestRate']    ? parseFloat(s3['interestRate'])    : null,
+      spread:          s3['spread']          ? parseFloat(s3['spread'])          : null,
+      benchmarkId:     s3['benchmark']       || null,
+      dayCount:        s3['dayCountRule']    ?? '',
+      compoundingFlag: s2['compoundingRule'] !== 'NONE' && !!s2['compoundingRule'],
+      compoundFreq:    s2['compoundingRule'] !== 'NONE' ? s2['compoundingRule'] : null,
+      fixingFreq:      s3['fixingFrequency'] || null,
+      settlementFreq:  s3['settlementFreq']  ?? '',
+    };
   }
 
   cancelModal(): void { this.showModal = false; }
